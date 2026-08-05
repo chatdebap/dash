@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-[#08080f] text-neutral-300 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  ::selection {
+    @apply bg-accent-500/25;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-700 rounded-full;
+  }
+}
+
+@layer components {
+  .section-pad {
+    @apply px-5 sm:px-8 lg:px-12;
+  }
+  .section-pad-x {
+    @apply px-5 sm:px-8 lg:px-12;
+  }
+  .container-edge {
+    @apply mx-auto w-full max-w-7xl;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-accent-400/30 bg-accent-600/90 px-6 py-3.5 text-sm font-medium tracking-wide text-white shadow-lg shadow-accent-900/40 backdrop-blur-sm transition-all duration-300 hover:bg-accent-500 hover:shadow-accent-500/30 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400/50;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-neutral-700/60 bg-neutral-900/40 px-6 py-3.5 text-sm font-medium tracking-wide text-neutral-200 backdrop-blur-sm transition-all duration-300 hover:border-neutral-600 hover:bg-neutral-800/60 hover:text-white active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-white;
+  }
+  .card {
+    @apply rounded-3xl border border-neutral-800/80 bg-neutral-900/50 p-7 transition-all duration-300 hover:border-neutral-700/80;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium;
+  }
+  .input-field {
+    @apply w-full rounded-xl border border-neutral-700 bg-neutral-900/60 px-4 py-3 text-sm text-neutral-100 placeholder:text-neutral-500 transition-colors focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-400;
+  }
+}
+
+/* Auto-scroll gallery — horizontal */
+.animate-scroll-x {
+  animation: scroll-x 40s linear infinite;
+}
+.animate-scroll-x:hover {
+  animation-play-state: paused;
+}
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
