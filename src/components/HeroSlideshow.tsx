@@ -13,19 +13,12 @@ interface Props {
 
 export function HeroSlideshow({ images, intervalMs = 4000 }: Props) {
   const [index, setIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const timerRef = useRef<number | null>(null);
 
-  const advance = () => {
-    setIsAnimating(true);
-    window.setTimeout(() => {
-      setIndex((i) => (i + 1) % images.length);
-      setIsAnimating(false);
-    }, 600);
-  };
-
   useEffect(() => {
-    timerRef.current = window.setTimeout(advance, intervalMs);
+    timerRef.current = window.setTimeout(() => {
+      setIndex((i) => (i + 1) % images.length);
+    }, intervalMs);
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
@@ -38,9 +31,9 @@ export function HeroSlideshow({ images, intervalMs = 4000 }: Props) {
           key={i}
           className={`absolute inset-0 transition-all duration-700 ease-out ${
             i === index
-              ? 'scale-100 opacity-100'
+              ? 'translate-x-0 opacity-100'
               : i === (index - 1 + images.length) % images.length
-                ? 'scale-105 opacity-0'
+                ? '-translate-x-full opacity-0'
                 : 'translate-x-full opacity-0'
           }`}
         >
@@ -57,7 +50,6 @@ export function HeroSlideshow({ images, intervalMs = 4000 }: Props) {
         </div>
       ))}
 
-      {/* Progress dots */}
       <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
         {images.map((_, i) => (
           <button
