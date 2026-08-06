@@ -11,7 +11,7 @@ const MOBILE_FEES = [
 
 export default function PricingPage() {
   return (
-    <main className="bg-[#08080f] pt-20">
+    <main className="pt-20">
       <section className="py-16 lg:py-24">
         <div className="container-edge section-pad-x">
           <div className="mx-auto max-w-2xl text-center">

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Check, ChevronDown, Clock, ArrowRight, X, AlertCircle, CheckCircle2, Gauge, Smartphone, Disc3 } from 'lucide-react';
+import { Check, ChevronDown, Clock, ArrowRight, X, CircleAlert as AlertCircle, CircleCheck as CheckCircle2, Gauge, Smartphone, Disc3 } from 'lucide-react';
 import { BRANDS, VEHICLES, getVehicleData, type BrandId, type VehicleModel } from '@/data/vehicles';
 
 type PackageId = 'cluster' | 'carplay' | 'bundle' | 'bundle-mfsw';
@@ -14,10 +14,10 @@ const PACKAGES: { id: PackageId; label: string; icon: typeof Gauge; price: strin
 function VWLogo({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 100 100" className={className} aria-label="Volkswagen" role="img" fill="none">
-      <circle cx="50" cy="50" r="47" stroke="currentColor" strokeWidth="4" />
-      <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.5" />
-      <path d="M28 32 L38 70 L50 42 L62 70 L72 32" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M36 32 L42 62 L50 46 L58 62 L64 32" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="50" cy="50" r="44" stroke="currentColor" strokeWidth="5" />
+      <path d="M50 8 L50 92" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+      <path d="M30 30 L50 60 L70 30" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M30 70 L50 40 L70 70" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
     </svg>
   );
 }
@@ -57,15 +57,15 @@ export function VehicleSelector() {
           <p className="mt-4 text-lg text-neutral-400">Atlanta's best dashboard work for VAG vehicles. Select your brand and model to see stock status, timeline, and choose your package.</p>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-6">
+        <div className="mx-auto mt-12 grid max-w-xl gap-3 sm:grid-cols-2 sm:gap-4">
           {BRANDS.map((b) => {
             const active = brand === b.id;
             return (
               <button key={b.id} type="button" onClick={() => { setBrand(b.id); setModel(null); setModelOpen(true); }}
-                className={`group relative flex flex-col items-center justify-center gap-4 rounded-3xl border p-8 transition-all duration-300 sm:p-10 ${active ? 'border-accent-500 bg-accent-500/10 shadow-xl shadow-accent-500/10' : 'border-neutral-800/80 bg-neutral-900/50 hover:border-neutral-700'}`}>
-                <BrandMark brand={b.id} className={`h-16 w-16 transition-colors ${active ? 'text-accent-400' : 'text-neutral-500 group-hover:text-accent-400'}`} />
-                <span className={`text-lg font-semibold ${active ? 'text-accent-300' : 'text-white'}`}>{b.name}</span>
-                {active && <span className="absolute right-5 top-5 grid h-6 w-6 place-items-center rounded-full bg-accent-600 text-white"><Check className="h-4 w-4" /></span>}
+                className={`group relative flex items-center gap-4 rounded-2xl border px-5 py-4 transition-all duration-300 ${active ? 'border-accent-500 bg-accent-500/10 shadow-lg shadow-accent-500/10' : 'border-neutral-800/80 bg-neutral-900/50 hover:border-neutral-700'}`}>
+                <BrandMark brand={b.id} className={`h-10 w-10 shrink-0 transition-colors ${active ? 'text-accent-400' : 'text-neutral-500 group-hover:text-accent-400'}`} />
+                <span className={`text-base font-semibold ${active ? 'text-accent-300' : 'text-white'}`}>{b.name}</span>
+                {active && <span className="absolute right-3 top-3 grid h-5 w-5 place-items-center rounded-full bg-accent-600 text-white"><Check className="h-3 w-3" /></span>}
               </button>
             );
           })}

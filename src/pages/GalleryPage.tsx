@@ -8,7 +8,7 @@ const AFTER_AUDI = 'https://images.pexels.com/photos/10475771/pexels-photo-10475
 
 export default function GalleryPage() {
   return (
-    <main className="bg-[#08080f] pt-20">
+    <main className="pt-20">
       <section className="py-16 lg:py-24">
         <div className="container-edge section-pad-x">
           <div className="max-w-2xl">
@@ -17,8 +17,8 @@ export default function GalleryPage() {
             <p className="mt-4 text-lg text-neutral-400">Drag the sliders to see the transformation from analog to digital.</p>
           </div>
           <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            <BeforeAfterSlider beforeSrc={BEFORE_VW} afterSrc={AFTER_VW} beforeAlt="2010 VW Golf MK6 analog instrument cluster" afterAlt="MK7 Golf R digital cluster installed" label="MK6 Golf — Analog → MK7 Golf R Digital Cluster" />
-            <BeforeAfterSlider beforeSrc={BEFORE_AUDI} afterSrc={AFTER_AUDI} beforeAlt="2010 Audi A4 analog instrument cluster" afterAlt="Audi premium digital cockpit" label="Audi A4 — Analog → Virtual Cockpit" />
+            <BeforeAfterSlider beforeSrc={BEFORE_VW} afterSrc={AFTER_VW} beforeAlt="VW Golf MK6 analog instrument cluster" afterAlt="MK7 Golf R digital cluster installed" label="MK6 Golf — Analog → MK7 Golf R Digital Cluster" />
+            <BeforeAfterSlider beforeSrc={BEFORE_AUDI} afterSrc={AFTER_AUDI} beforeAlt="Audi analog instrument cluster" afterAlt="Audi premium digital cockpit" label="Audi A4 — Analog → Virtual Cockpit" />
           </div>
         </div>
       </section>

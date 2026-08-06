@@ -1,24 +1,21 @@
-import { ArrowRight, Check, Gauge, Smartphone, Package, CircleDot, ShieldCheck, PackageCheck, BadgeCheck, Car, MapPin, Route, Clock } from 'lucide-react';
+import { ArrowRight, Check, Gauge, Smartphone, Package, CircleDot, ShieldCheck, PackageCheck, BadgeCheck, Car, MapPin, Route, Clock, CarFront, ClipboardList, Wrench, Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Contact, Footer } from '@/components/Contact';
 import { BeforeAfterSlider } from '@/components/BeforeAfterSlider';
+import { HeroSlideshow } from '@/components/HeroSlideshow';
 import { DISPLAY_THEMES, RECENT_INSTALLS, REVIEWS } from '@/data/vehicles';
 import { useState } from 'react';
-import { Star, ArrowUpRight } from 'lucide-react';
+import { Star } from 'lucide-react';
 
-const GALLERY_IMAGES = [
-  { src: 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'MK6 Golf', sub: 'Digital Cluster Upgrade' },
-  { src: 'https://images.pexels.com/photos/10475771/pexels-photo-10475771.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'Audi A4', sub: 'Virtual Cockpit' },
-  { src: 'https://images.pexels.com/photos/29293963/pexels-photo-29293963.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'MK6 GTI', sub: 'Active Info Display' },
-  { src: 'https://images.pexels.com/photos/11526276/pexels-photo-11526276.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'Audi A3', sub: 'Digital Cockpit' },
-  { src: 'https://images.pexels.com/photos/12870231/pexels-photo-12870231.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'MK6 Golf', sub: 'Digital Display' },
-  { src: 'https://images.pexels.com/photos/10534825/pexels-photo-10534825.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'Audi Q5', sub: 'Premium Cockpit' },
-  { src: 'https://images.pexels.com/photos/37685712/pexels-photo-37685712.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'MK6 Golf R', sub: 'Digital Cluster' },
-  { src: 'https://images.pexels.com/photos/34404460/pexels-photo-34404460.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'Audi A4', sub: 'Virtual Cockpit' },
-  { src: 'https://images.pexels.com/photos/36579824/pexels-photo-36579824.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'MK6 Golf', sub: 'Night Drive Mode' },
-  { src: 'https://images.pexels.com/photos/9452196/pexels-photo-9452196.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'Audi A3', sub: 'Digital Dashboard' },
-  { src: 'https://images.pexels.com/photos/31775324/pexels-photo-31775324.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'MK6 GTI', sub: 'Sport Mode Cluster' },
-  { src: 'https://images.pexels.com/photos/13275527/pexels-photo-13275527.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&dpr=2', label: 'Audi Q5', sub: 'Cockpit View' },
+const SLIDESHOW_IMAGES = [
+  { src: 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'VW Golf R MK7', sub: 'Digital Cluster — Active Info Display' },
+  { src: 'https://images.pexels.com/photos/10475771/pexels-photo-10475771.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Audi R8', sub: 'Virtual Cockpit' },
+  { src: 'https://images.pexels.com/photos/29293963/pexels-photo-29293963.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'VW Golf GTI MK7', sub: 'Digital Dashboard + CarPlay' },
+  { src: 'https://images.pexels.com/photos/11526276/pexels-photo-11526276.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Audi Q5', sub: 'Premium Digital Cockpit' },
+  { src: 'https://images.pexels.com/photos/12870231/pexels-photo-12870231.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'VW Golf MK7', sub: 'Active Info Display' },
+  { src: 'https://images.pexels.com/photos/34404460/pexels-photo-34404460.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Audi A4', sub: 'Virtual Cockpit + Infotainment' },
+  { src: 'https://images.pexels.com/photos/37685712/pexels-photo-37685712.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'VW Golf R', sub: 'Digital Cluster — Sport Mode' },
+  { src: 'https://images.pexels.com/photos/9452196/pexels-photo-9452196.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Audi A3', sub: 'Digital Dashboard' },
 ];
 
 const BEFORE_VW = 'https://images.pexels.com/photos/15256366/pexels-photo-15256366.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
@@ -26,14 +23,38 @@ const AFTER_VW = 'https://images.pexels.com/photos/28743959/pexels-photo-2874395
 const BEFORE_AUDI = 'https://images.pexels.com/photos/16520978/pexels-photo-16520978.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 const AFTER_AUDI = 'https://images.pexels.com/photos/10475771/pexels-photo-10475771.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 
-const CARPLAY_IMG = 'https://images.pexels.com/photos/29293963/pexels-photo-29293963.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const CLUSTER_BEFORE = 'https://images.pexels.com/photos/15256366/pexels-photo-15256366.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const CLUSTER_AFTER = 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const CARPLAY_IMG = 'https://images.pexels.com/photos/20653991/pexels-photo-20653991.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const BUNDLE_IMG = 'https://images.pexels.com/photos/34404460/pexels-photo-34404460.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const MFSW_IMG = 'https://images.pexels.com/photos/28743952/pexels-photo-28743952.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
 const FLAGSHIP_IMG = 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&dpr=2';
 
 const SERVICES = [
-  { icon: Gauge, title: 'Digital Cluster Upgrade', tag: 'Analog to full digital instrument cluster', desc: 'Replace your analog gauges with a fully digital, VW/Audi OEM-spec Active Info Display. VIN-specific programming for perfect integration.', price: '$799', priceTag: 'cluster only', primary: true },
-  { icon: Smartphone, title: 'Apple CarPlay', tag: 'Wireless CarPlay integration', desc: 'Full Apple CarPlay and Android Auto capability added to your factory infotainment. Retains OEM steering wheel controls.', price: '$399', priceTag: 'starting', hasImage: true },
-  { icon: Package, title: 'Cluster + CarPlay Bundle', tag: 'Digital cluster + wireless CarPlay together', desc: 'Our most popular package — a full digital cluster upgrade bundled with wireless Apple CarPlay and Android Auto. Save $300 versus purchasing each separately.', price: '$999', oldPrice: '$1299', priceTag: 'save $300', popular: true },
-  { icon: CircleDot, title: 'Steering Wheel + MFSW', tag: 'Multifunction steering wheel upgrade', desc: 'Upgrade to a multifunction steering wheel with working buttons — fully coded to your vehicle. Available as an add-on to any cluster or CarPlay package.', price: 'Contact for quote', priceTag: 'response within 24 hrs', addon: true },
+  {
+    icon: Gauge, title: 'Digital Cluster Upgrade', tag: 'Analog to full digital instrument cluster',
+    desc: 'Replace your analog gauges with a fully digital, VW/Audi OEM-spec Active Info Display. VIN-specific programming for perfect integration.',
+    price: '$799', priceTag: 'cluster only', primary: true,
+    images: [CLUSTER_BEFORE, CLUSTER_AFTER], imageLabels: ['Before — MK6 GTI analog', 'After — MK7 Golf R digital'],
+  },
+  {
+    icon: Smartphone, title: 'Apple CarPlay', tag: 'Wireless CarPlay integration',
+    desc: 'Full Apple CarPlay and Android Auto capability added to your factory infotainment. Retains OEM steering wheel controls.',
+    price: '$399', priceTag: 'starting',
+    images: [CARPLAY_IMG], imageLabels: ['CarPlay on infotainment screen'],
+  },
+  {
+    icon: Package, title: 'Cluster + CarPlay Bundle', tag: 'Digital cluster + wireless CarPlay together',
+    desc: 'Our most popular package — a full digital cluster upgrade bundled with wireless Apple CarPlay and Android Auto. Save $300 versus purchasing each separately.',
+    price: '$999', oldPrice: '$1299', priceTag: 'save $300', popular: true,
+    images: [BUNDLE_IMG], imageLabels: ['Digital cluster + CarPlay screen'],
+  },
+  {
+    icon: CircleDot, title: 'Steering Wheel + MFSW', tag: 'Multifunction steering wheel upgrade',
+    desc: 'Upgrade to a multifunction steering wheel with working buttons — fully coded to your vehicle. Available as an add-on to any cluster or CarPlay package.',
+    price: 'Contact for quote', priceTag: 'response within 24 hrs', addon: true,
+    images: [MFSW_IMG], imageLabels: ['GTI MK7 multifunction steering wheel'],
+  },
 ];
 
 const INCLUDED = [
@@ -44,10 +65,10 @@ const INCLUDED = [
 ];
 
 const STEPS = [
-  { step: '01', title: 'Choose Your Vehicle', desc: 'Select VW or Audi, then your exact model and year.' },
-  { step: '02', title: 'Select Your Package', desc: 'Digital cluster, CarPlay, or the full bundle with steering wheel.' },
-  { step: '03', title: 'We Come To You', desc: 'Mobile install at your home or office. First 20 miles free.' },
-  { step: '04', title: 'Drive Away Upgraded', desc: 'Fully coded, warranted, and ready to go in 2–3 days.' },
+  { step: '01', icon: CarFront, title: 'Choose Your Vehicle', desc: 'Select VW or Audi, then your exact model and year.' },
+  { step: '02', icon: ClipboardList, title: 'Select Your Package', desc: 'Digital cluster, CarPlay, or the full bundle with steering wheel.' },
+  { step: '03', icon: Wrench, title: 'We Come To You', desc: 'Mobile install at your home or office. First 20 miles free.' },
+  { step: '04', icon: Rocket, title: 'Drive Away Upgraded', desc: 'Fully coded, warranted, and ready to go in 2–3 days.' },
 ];
 
 const TERMS = [
@@ -64,31 +85,14 @@ export default function HomePage() {
   const filtered = filter === 'All' ? RECENT_INSTALLS : RECENT_INSTALLS.filter((r) => r.category === filter);
 
   return (
-    <main className="bg-[#08080f]">
-      {/* HERO — auto-scroll gallery on left, text on right, seamless blend */}
+    <main>
+      {/* HERO — slideshow on left, text on right */}
       <section className="relative overflow-hidden pt-16 lg:pt-20">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute left-1/4 top-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-accent-600/8 blur-[140px]" />
-        </div>
         <div className="container-edge section-pad-x">
           <div className="grid items-center gap-0 lg:grid-cols-2 lg:gap-12">
-            {/* Left: auto-scroll gallery — no border, blends into text */}
+            {/* Left: slideshow */}
             <div className="animate-fade-up order-1 lg:order-1">
-              <div className="relative h-[380px] overflow-hidden sm:h-[480px] lg:h-[600px]">
-                <div className="flex h-full w-max animate-scroll-x gap-3">
-                  {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((img, i) => (
-                    <div key={i} className="relative h-full shrink-0 overflow-hidden rounded-2xl">
-                      <img src={img.src} alt={`${img.label} ${img.sub}`} className="h-full w-[280px] object-cover sm:w-[340px]" loading="lazy" />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                        <p className="text-sm font-semibold text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]">{img.label}</p>
-                        <p className="text-xs text-white/70">{img.sub}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#08080f] to-transparent" />
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#08080f]/60 to-transparent" />
-              </div>
+              <HeroSlideshow images={SLIDESHOW_IMAGES} intervalMs={4000} />
             </div>
 
             {/* Right: text */}
@@ -132,10 +136,10 @@ export default function HomePage() {
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">Precision hardware, OEM-spec coding, and professional mobile installation.</h2>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2">
-            {SERVICES.map((s, i) => {
+            {SERVICES.map((s) => {
               const Icon = s.icon;
               return (
-                <div key={s.title} className={`relative flex flex-col rounded-3xl border border-neutral-800/80 bg-neutral-900/50 p-6 transition-all duration-300 hover:border-neutral-700/80 sm:p-8`} style={{ animationDelay: `${i * 80}ms` }}>
+                <div key={s.title} className="relative flex flex-col rounded-3xl border border-neutral-800/80 bg-neutral-900/50 p-6 transition-all duration-300 hover:border-neutral-700/80 sm:p-8">
                   {s.popular && <span className="absolute -top-3 left-6 rounded-full bg-accent-600 px-3 py-1 text-xs font-semibold text-white shadow-lg">Most Popular</span>}
                   {s.addon && <span className="absolute -top-3 left-6 rounded-full bg-neutral-700 px-3 py-1 text-xs font-semibold text-neutral-200">Add-On</span>}
                   {s.primary && <span className="absolute -top-3 left-6 rounded-full bg-accent-600 px-3 py-1 text-xs font-semibold text-white shadow-lg">Main Service</span>}
@@ -143,9 +147,20 @@ export default function HomePage() {
                   <h3 className="font-display text-xl font-bold text-white">{s.title}</h3>
                   <p className="mt-1 text-sm text-accent-400">{s.tag}</p>
                   <p className="mt-3 text-sm leading-relaxed text-neutral-400">{s.desc}</p>
-                  {s.hasImage && (
+                  {s.images.length === 2 ? (
+                    <div className="mt-4 grid grid-cols-2 gap-2">
+                      <div className="relative overflow-hidden rounded-2xl border border-neutral-800">
+                        <img src={s.images[0]} alt={s.imageLabels[0]} className="aspect-[3/2] w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
+                        <span className="absolute left-2 top-2 rounded-full bg-black/60 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">Before</span>
+                      </div>
+                      <div className="relative overflow-hidden rounded-2xl border border-neutral-800">
+                        <img src={s.images[1]} alt={s.imageLabels[1]} className="aspect-[3/2] w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
+                        <span className="absolute left-2 top-2 rounded-full bg-accent-600/80 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">After</span>
+                      </div>
+                    </div>
+                  ) : (
                     <div className="mt-4 overflow-hidden rounded-2xl border border-neutral-800">
-                      <img src={CARPLAY_IMG} alt="Apple CarPlay on a VW Golf GTI MK7 infotainment screen" className="aspect-[3/2] w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
+                      <img src={s.images[0]} alt={s.imageLabels[0]} className="aspect-[3/2] w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
                     </div>
                   )}
                   <div className="mt-5 flex items-baseline gap-2">
@@ -195,8 +210,8 @@ export default function HomePage() {
             <p className="mt-4 text-lg text-neutral-400">Drag the slider to see the transformation from analog to digital.</p>
           </div>
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            <BeforeAfterSlider beforeSrc={BEFORE_VW} afterSrc={AFTER_VW} beforeAlt="2010 VW Golf analog instrument cluster" afterAlt="VW Golf R MK7 digital cluster" label="MK6 Golf — Analog → Active Info Display" />
-            <BeforeAfterSlider beforeSrc={BEFORE_AUDI} afterSrc={AFTER_AUDI} beforeAlt="2010 Audi analog instrument cluster" afterAlt="Audi premium digital cockpit" label="Audi A4 — Analog → Virtual Cockpit" />
+            <BeforeAfterSlider beforeSrc={BEFORE_VW} afterSrc={AFTER_VW} beforeAlt="VW Golf MK6 analog instrument cluster" afterAlt="VW Golf R MK7 digital cluster" label="MK6 Golf — Analog → Active Info Display" />
+            <BeforeAfterSlider beforeSrc={BEFORE_AUDI} afterSrc={AFTER_AUDI} beforeAlt="Audi analog instrument cluster" afterAlt="Audi premium digital cockpit" label="Audi A4 — Analog → Virtual Cockpit" />
           </div>
         </div>
       </section>
@@ -307,13 +322,14 @@ export default function HomePage() {
             <p className="mt-4 text-lg text-neutral-400">From selection to driving away — simple and straightforward.</p>
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {STEPS.map((s) => (
-              <div key={s.step} className="relative rounded-3xl border border-neutral-800/80 bg-neutral-900/50 p-6">
+            {STEPS.map((s) => { const Icon = s.icon; return (
+              <div key={s.step} className="group relative overflow-hidden rounded-3xl border border-neutral-800/80 bg-neutral-900/50 p-6 transition-all hover:border-accent-500/50">
                 <span className="font-display text-4xl font-extrabold text-accent-500/30">{s.step}</span>
+                <div className="mt-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-accent-500/10 text-accent-400 transition-all group-hover:scale-110 group-hover:bg-accent-500/20"><Icon className="h-5 w-5" strokeWidth={2} /></div>
                 <h3 className="mt-3 font-display text-base font-bold text-white">{s.title}</h3>
                 <p className="mt-2 text-sm text-neutral-400">{s.desc}</p>
               </div>
-            ))}
+            ); })}
           </div>
         </div>
       </section>
