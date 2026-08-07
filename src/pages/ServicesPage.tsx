@@ -59,7 +59,7 @@ export default function ServicesPage() {
     <main className="pt-20">
       <section className="py-16 lg:py-24">
         <div className="container-edge section-pad-x">
-          <div className="max-w-2xl">
+          <div className="mx-auto max-w-2xl text-center">
             <p className="eyebrow">Our Services</p>
             <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">Precision upgrades for your cockpit</h1>
             <p className="mt-4 text-lg text-neutral-400">Atlanta's best dashboard work for VAG vehicles. From CarPlay to full digital cluster conversions and multifunction steering wheels — everything we do is OEM-spec and mobile-installed.</p>

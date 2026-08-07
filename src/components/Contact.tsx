@@ -27,21 +27,21 @@ export function Contact() {
 
         {/* Contact methods — compact row */}
         <div className="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <a href={PHONE_HREF} className="flex items-center gap-3 rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-4 transition-colors hover:border-accent-500/50">
+          <a href={PHONE_HREF} className="flex min-w-0 items-center gap-3 overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-4 transition-colors hover:border-accent-500/50">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-500/10 text-accent-400"><Phone className="h-5 w-5" /></span>
-            <div><p className="text-xs text-neutral-500">Call</p><p className="text-sm font-semibold text-white">{PHONE}</p></div>
+            <div className="min-w-0"><p className="text-xs text-neutral-500">Call</p><p className="text-sm font-semibold text-white">{PHONE}</p></div>
           </a>
-          <a href={TEXT_HREF} className="flex items-center gap-3 rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-4 transition-colors hover:border-accent-500/50">
+          <a href={TEXT_HREF} className="flex min-w-0 items-center gap-3 overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-4 transition-colors hover:border-accent-500/50">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-500/10 text-accent-400"><MessageSquare className="h-5 w-5" /></span>
-            <div><p className="text-xs text-neutral-500">Text</p><p className="text-sm font-semibold text-white">{PHONE}</p></div>
+            <div className="min-w-0"><p className="text-xs text-neutral-500">Text</p><p className="text-sm font-semibold text-white">{PHONE}</p></div>
           </a>
-          <a href={EMAIL_HREF} className="flex items-center gap-3 rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-4 transition-colors hover:border-accent-500/50">
+          <a href={EMAIL_HREF} className="flex min-w-0 items-center gap-3 overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-4 transition-colors hover:border-accent-500/50">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-500/10 text-accent-400"><Mail className="h-5 w-5" /></span>
-            <div><p className="text-xs text-neutral-500">Email</p><p className="text-sm font-semibold text-white">{EMAIL}</p></div>
+            <div className="min-w-0"><p className="text-xs text-neutral-500">Email</p><p className="break-all text-sm font-semibold text-white">{EMAIL}</p></div>
           </a>
-          <div className="flex items-center gap-3 rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-4">
+          <div className="flex min-w-0 items-center gap-3 overflow-hidden rounded-2xl border border-neutral-800/80 bg-neutral-900/50 p-4">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-accent-500/10 text-accent-400"><Clock className="h-5 w-5" /></span>
-            <div><p className="text-xs text-neutral-500">Response</p><p className="text-sm font-semibold text-white">Within 24 hrs</p></div>
+            <div className="min-w-0"><p className="text-xs text-neutral-500">Response</p><p className="text-sm font-semibold text-white">Within 24 hrs</p></div>
           </div>
         </div>
 

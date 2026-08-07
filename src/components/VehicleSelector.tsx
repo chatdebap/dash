@@ -14,10 +14,10 @@ const PACKAGES: { id: PackageId; label: string; icon: typeof Gauge; price: strin
 function VWLogo({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 100 100" className={className} aria-label="Volkswagen" role="img" fill="none">
-      <circle cx="50" cy="50" r="44" stroke="currentColor" strokeWidth="5" />
-      <path d="M50 8 L50 92" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
-      <path d="M30 30 L50 60 L70 30" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <path d="M30 70 L50 40 L70 70" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="4.5" />
+      <path d="M50 22 L32 78" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+      <path d="M50 22 L68 78" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
+      <path d="M40 78 L50 50 L60 78" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
