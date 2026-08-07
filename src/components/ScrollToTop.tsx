@@ -9,11 +9,12 @@ export function ScrollToTop() {
       const id = hash.replace('#', '');
       const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top, left: 0, behavior: 'auto' });
         return;
       }
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   }, [pathname, hash]);
 
   return null;
